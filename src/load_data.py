@@ -1,26 +1,28 @@
 import os
 from get_data import read_params, get_data
 import argparse
+import joblib
 
 
 
 def load_and_save(config_path):
     config = read_params(config_path)
     news = get_data(config_path)
+    raw_data_path = config["load_data"]["raw_dataset_csv"]
     print(f"100% des observations: {news.shape[0]}")
+
     sample = config["load_data"]["sample_frac"]
     random_state = config["base"]["random_state"]
+
     news = news.sample(frac = sample , random_state = random_state)
 
     news.reset_index(drop=True, inplace=True)
-
+    print(news.head(1))
     print(f" 1% des observations: {news.shape[0]}")
-    
-    raw_data_path = config["load_data"]["raw_dataset_csv"]
-    
-    news.to_csv(raw_data_path, sep=";")
 
+    news.to_csv(raw_data_path, sep=";", index=False, encoding="utf-8")
 
+    #joblib.dump(news, raw_data_path, compress=4)
 
 
 

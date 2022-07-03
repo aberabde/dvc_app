@@ -2,10 +2,13 @@ from tqdm import tqdm
 import joblib
 import numpy as np
 import pandas as pd
+import re
 import scipy.sparse as sparse
+import datetime
 import nltk
 from nltk.corpus import stopwords
 from nltk.stem import WordNetLemmatizer
+from num2words import num2words
 from nltk.corpus import wordnet
 from nltk import tokenize
 nltk.download('stopwords', quiet=True)
@@ -16,30 +19,19 @@ nltk.download('omw-1.4', quiet=True)
 
 ###-0
 
-def timer_decorator(func):
-    """
-    Affiche le temps d'exécution de l'objet fonction passé comme paramètre
-    """
-    def wrap_func(*args, **kwargs):
-        t1 = time()
-        result = func(*args, **kwargs)
-        t2 = time()
-        seconds_input = (t2-t1)
-        conversion = datetime.timedelta(seconds=seconds_input)
-        converted_time = str(conversion)
-        print(f'Function {func.__name__!r} executed in {converted_time} \n')
-        return result
-    return wrap_func
+
 
 
 #######-1
-@timer_decorator
+
+
+
 def convert_lower_case(source) -> pd.Series:
     print("starting convertig to lower case ...")
     return source.str.lower()
 
 ###### -2 
-@timer_decorator
+
 def remove_stop_words(source, excluded) -> pd.Series:
     print("Starting removing stopwords ...")
     def helper(line, excluded = excluded):
@@ -47,13 +39,13 @@ def remove_stop_words(source, excluded) -> pd.Series:
     return source.apply(helper)
 
 ###### -3
-@timer_decorator
+
 def keep_alphanumeric_and_dot(source) -> pd.Series:
     print("Starting filtering alphanumeric characters ...")
     return source.apply(lambda x: re.sub('[^A-Za-z0-9.]+', ' ', x))
 
 ###### - 4
-@timer_decorator
+
 def remove_single_characters(source) -> pd.Series:
     print("starting removing single characters ...")
     
@@ -68,7 +60,7 @@ def remove_single_characters(source) -> pd.Series:
     return source.map(helper)
 
 ##### - 5 
-@timer_decorator
+
 def remove_dot(source) -> pd.Series:
     print("starting removing dots ...")
     
@@ -83,7 +75,7 @@ def remove_dot(source) -> pd.Series:
     return source.map(helper)
 
 ###### - 6 
-@timer_decorator
+
 def remove_stop_words(source, excluded) -> pd.Series:
     print("Starting removing stopwords ...")
     def helper(line, excluded = excluded):
@@ -91,7 +83,7 @@ def remove_stop_words(source, excluded) -> pd.Series:
     return source.apply(helper)
 
 #### - 7 
-@timer_decorator
+
 def convert_numbers_to_text(source) -> pd.Series:
     print("starting converting numbers to text ...")
     
@@ -107,10 +99,10 @@ def convert_numbers_to_text(source) -> pd.Series:
                 if not has_digits:
                     text += word
                 else:
-                    """
-                    extraire les chiffres et considérer le reste des caractères comme un bruit.
-                    pas le plus optimisé mais c'est acceptable dans notre cas
-                    """
+                    
+                    #extraire les chiffres et considérer le reste des caractères comme un bruit.
+                    #pas le plus optimisé mais c'est acceptable dans notre cas
+                    
                     for m in [num2words(n, to = 'cardinal') for n in re.findall(r'\d+', word)]:
                         text += " " + m 
         return text
@@ -122,9 +114,9 @@ def convert_numbers_to_text(source) -> pd.Series:
 
 
 def lemmatize_helper(sentence): 
-    """
-        mappage entre les tags NLTK et WordNetLemmatizer. WordNetLemmatizer ne suporte pas tous les tags NLTK
-    """
+    
+      #  mappage entre les tags NLTK et WordNetLemmatizer. WordNetLemmatizer ne suporte pas tous les tags NLTK
+    
     pos_tagger = lambda nltk_tag: {
         "J": wordnet.ADJ,
         "N": wordnet.NOUN,
@@ -150,10 +142,32 @@ def lemmatize_helper(sentence):
 
     return " ".join(lemmatized_sentence)
 
-@timer_decorator
+
 def lemmatize(source) -> pd.Series:
     print("starting lemmatizing ...")
     return source.apply(lemmatize_helper)
+
+
+
+def processed_data(source):
+
+
+    print("STARTING PREPROCESSING THE RAW TEXT ...\n")
+    
+    #tqdm.pandas(desc='Processing Dataframe')
+
+    result = keep_alphanumeric_and_dot(source)
+    result = convert_lower_case(result)
+    result = convert_numbers_to_text(result)
+    result = remove_single_characters(result)
+    result = lemmatize(result)
+    result = remove_dot(result)
+    result = remove_stop_words(result, stopwords.words('english'))
+    
+    print("FINISHED PREPROCESSING THE RAW TEXT ...")
+    return result
+
+
 
 
 

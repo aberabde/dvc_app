@@ -27,7 +27,7 @@ def get_data(config_path):
     
     news = pd.concat([real_news, fake_news])
     
-
+    #print(news.head(1))
     ## df = pd.read_csv(data_path, sep=",", encoding='utf-8')
     return news
 
