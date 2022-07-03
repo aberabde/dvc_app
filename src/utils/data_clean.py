@@ -1,6 +1,7 @@
 from tqdm import tqdm
 import joblib
 import numpy as np
+import pandas as pd
 import scipy.sparse as sparse
 import nltk
 from nltk.corpus import stopwords
@@ -156,5 +157,3 @@ def lemmatize(source) -> pd.Series:
 
 
 
-def save_matrix(df, text_matrix, out_path):
-joblib.dump(result, out_path) 
