@@ -17,17 +17,17 @@ stages:
       size: 1052
     params:
       params.yaml:
-        load_data.sample_frac: 0.2
+        load_data.sample_frac: 0.1
     outs:
     - path: data/raw/news.csv
-      md5: 3d57b37d15ac10f5406bb5bea9637230
-      size: 22080651
+      md5: ced797d385ec7f0232e95a6956d42a58
+      size: 11082720
   preprocess_data:
     cmd: python src/preprocess_data.py --config=params.yaml
     deps:
     - path: data/raw/news.csv
-      md5: 3d57b37d15ac10f5406bb5bea9637230
-      size: 22080651
+      md5: ced797d385ec7f0232e95a6956d42a58
+      size: 11082720
     - path: src/preprocess_data.py
       md5: dba4e06621078ad73b049519a2c7ed98
       size: 1719
@@ -37,14 +37,14 @@ stages:
       nfiles: 3
     outs:
     - path: data/processed/clean_news.csv
-      md5: 84f5155c56fdd97effd8da18f325a18e
-      size: 15588231
+      md5: 8a675a6738b9bcccf3d621ae10b5d58c
+      size: 7820196
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/processed/clean_news.csv
-      md5: 84f5155c56fdd97effd8da18f325a18e
-      size: 15588231
+      md5: 8a675a6738b9bcccf3d621ae10b5d58c
+      size: 7820196
     - path: src/split_data.py
       md5: 2b428bf6697cdeaa06d74c33a74e3c3d
       size: 1475
@@ -54,20 +54,20 @@ stages:
       nfiles: 3
     outs:
     - path: data/processed/test_news.csv
-      md5: edbec46510bb7e08c1b8b9f93ac4f778
-      size: 4740343
+      md5: bbb7bcd08eb2f9b095cbf3df8ea9bc43
+      size: 2464468
     - path: data/processed/train_news.csv
-      md5: 9d010712e657b5d08127fae920ac2443
-      size: 10889646
+      md5: 3a30de94011b7e447b2e2601a9173046
+      size: 5376066
   featurize:
     cmd: python src/featurize.py --config=params.yaml
     deps:
     - path: data/processed/test_news.csv
-      md5: edbec46510bb7e08c1b8b9f93ac4f778
-      size: 4740343
+      md5: bbb7bcd08eb2f9b095cbf3df8ea9bc43
+      size: 2464468
     - path: data/processed/train_news.csv
-      md5: 9d010712e657b5d08127fae920ac2443
-      size: 10889646
+      md5: 3a30de94011b7e447b2e2601a9173046
+      size: 5376066
     - path: src/featurize.py
       md5: 2881251271b14327b04e2addec3006d2
       size: 2160
@@ -77,17 +77,17 @@ stages:
       nfiles: 3
     outs:
     - path: data/featurized/featurized_test_news.pkl
-      md5: 5f7a79602329bb949478c84f149b71a7
-      size: 4178801
+      md5: 3706529946e4d9102d83e4e162588803
+      size: 2142513
     - path: data/featurized/featurized_train_news.pkl
-      md5: 3a0baf071fa101d2b6ab58fc511f782c
-      size: 9672529
+      md5: 4e5faa344ae71244ad67f85ed77c8754
+      size: 4798041
   train:
     cmd: python src/train.py --config=params.yaml
     deps:
     - path: data/featurized/featurized_train_news.pkl
-      md5: 3a0baf071fa101d2b6ab58fc511f782c
-      size: 9672529
+      md5: 4e5faa344ae71244ad67f85ed77c8754
+      size: 4798041
     - path: src/train.py
       md5: 24f5a4fd03af957e05c00ae298d25aad
       size: 1188
@@ -97,14 +97,14 @@ stages:
       nfiles: 3
     outs:
     - path: saved_models/model.pkl
-      md5: 8c99ab3141808702e1a495618897afa7
-      size: 14588276
+      md5: 53eaa79ab830992ff6917301996a8a17
+      size: 9243041
   evaluate:
     cmd: python src/evaluate.py --config=params.yaml
     deps:
     - path: saved_models/model.pkl
-      md5: 8c99ab3141808702e1a495618897afa7
-      size: 14588276
+      md5: 53eaa79ab830992ff6917301996a8a17
+      size: 9243041
     - path: src/evaluate.py
       md5: da896d9bfb5f51c71541bfffc25caeb3
       size: 1165
@@ -114,5 +114,5 @@ stages:
       nfiles: 3
     outs:
     - path: report/scores.json
-      md5: deb138b753318b09fa9a8c73d30826cf
-      size: 40
+      md5: 29bd7729cedd25245270290f3a64956b
+      size: 25
