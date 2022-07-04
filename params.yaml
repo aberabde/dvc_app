@@ -24,3 +24,12 @@ featurize:
   featurized_test: data/featurized/featurized_test_news.pkl
   max_features: 2500
   n_grams: 3
+
+train:
+  model : saved_models/model.pkl
+  n_est : 500
+  n_jobs : 2
+  min_split : 12
+
+evaluate:
+  metrics : report/scores.json

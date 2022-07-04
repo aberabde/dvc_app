@@ -15,6 +15,7 @@ nltk.download('stopwords', quiet=True)
 None
 nltk.download('averaged_perceptron_tagger', quiet=True)
 nltk.download('omw-1.4', quiet=True)
+import json
 
 
 ###-0
@@ -192,6 +193,10 @@ def save_matrix(df, text_matrix, out_path):
     result = sparse.hstack([id_matrix, label_matrix, text_matrix], format="csr")
 
     joblib.dump(result, out_path) 
+
+def save_json(path: str, data: dict) -> None:
+    with open(path, "w") as f:
+        json.dump(data, f, indent=4)
 
 
 

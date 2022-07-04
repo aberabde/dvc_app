@@ -14,8 +14,8 @@ from sklearn.feature_extraction.text import CountVectorizer, TfidfTransformer
 
 def featurize(config_path):
     config = read_params(config_path)
-    clean_train_path = config["split_data"]["train_path"]
-    clean_test_path = config['split_data']["test_path"]
+    clean_train_path = config["split_data"]["train"]
+    clean_test_path = config['split_data']["test"]
     featurized_train_path = config['featurize']["featurized_train"]
     featurized_test_path =  config['featurize']["featurized_test"]
     max_features = config["featurize"]["max_features"]

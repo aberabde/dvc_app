@@ -27,6 +27,7 @@ def split_and_saved_data(config_path):
         stratify=df.label, 
         random_state=random_state
         )
+        
     print(test.head())
     print(test.head().index.to_list())
 
