@@ -6,6 +6,8 @@ stages:
     - src/load_data.py
     - data_given/Fake.csv
     - data_given/True.csv
+    params:
+    - load_data.sample_frac
     outs:
      - data/raw/news.csv
 
