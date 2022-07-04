@@ -32,3 +32,19 @@ stages:
     - path: data/processed/clean_news.csv
       md5: 69e268017be78503f187279826b7cffc
       size: 785723
+  split_data:
+    cmd: python src/split_data.py --config=params.yaml
+    deps:
+    - path: data/processed/clean_news.csv
+      md5: 69e268017be78503f187279826b7cffc
+      size: 785723
+    - path: src/split_data.py
+      md5: 2b428bf6697cdeaa06d74c33a74e3c3d
+      size: 1475
+    outs:
+    - path: data/processed/test_news.csv
+      md5: 19ed691a2021a688dd008c70825d5ce7
+      size: 247372
+    - path: data/processed/train_news.csv
+      md5: e10c25736c2d67217357f13cbf787a60
+      size: 539986
