@@ -38,3 +38,12 @@ stages:
     outs:
     - data/featurized/featurized_train_news.pkl
     - data/featurized/featurized_test_news.pkl
+
+  train :
+    cmd: python src/train.py --config=params.yaml
+    deps:
+    - src/train.py
+    - src/utils
+    - data/featurized/featurized_train_news.pkl 
+    outs:
+    - saved_models/model.pkl
