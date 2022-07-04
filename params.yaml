@@ -17,7 +17,7 @@ preprocess_data:
 split_data:
   train: data/processed/train_news.csv
   test: data/processed/test_news.csv
-  test_size: 0.3
+  test_size: 0.5
 
 featurize:
   featurized_train: data/featurized/featurized_train_news.pkl

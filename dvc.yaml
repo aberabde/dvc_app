@@ -26,6 +26,8 @@ stages:
     - src/split_data.py
     - src/utils
     - data/processed/clean_news.csv
+    params:
+    - split_data.test_size
     outs: 
     - data/processed/train_news.csv
     - data/processed/test_news.csv
@@ -37,6 +39,9 @@ stages:
     - data/processed/train_news.csv
     - data/processed/test_news.csv
     - src/utils
+    params:
+    - featurize.max_features
+    - featurize.n_grams
     outs:
     - data/featurized/featurized_train_news.pkl
     - data/featurized/featurized_test_news.pkl
@@ -46,7 +51,13 @@ stages:
     deps:
     - src/train.py
     - src/utils
-    - data/featurized/featurized_train_news.pkl 
+    - data/featurized/featurized_train_news.pkl
+
+    params:
+    - train.n_est
+    - train.n_jobs
+    - train.min_split
+
     outs:
     - saved_models/model.pkl
 
