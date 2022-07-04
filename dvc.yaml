@@ -47,3 +47,13 @@ stages:
     - data/featurized/featurized_train_news.pkl 
     outs:
     - saved_models/model.pkl
+
+  evaluate:
+    cmd: python src/evaluate.py --config=params.yaml
+    deps: 
+     - saved_models/model.pkl
+     - src/utils
+     - src/evaluate.py
+    metrics:
+     - report/scores.json:
+        cache: false   

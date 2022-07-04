@@ -96,3 +96,20 @@ stages:
     - path: saved_models/model.pkl
       md5: 45269191791eab19855e6cbe2525dad7
       size: 1862027
+  evaluate:
+    cmd: python src/evaluate.py --config=params.yaml
+    deps:
+    - path: saved_models/model.pkl
+      md5: 45269191791eab19855e6cbe2525dad7
+      size: 1862027
+    - path: src/evaluate.py
+      md5: da896d9bfb5f51c71541bfffc25caeb3
+      size: 1165
+    - path: src/utils
+      md5: c740f0a664ac26877dc194d1db10ce09.dir
+      size: 11755
+      nfiles: 3
+    outs:
+    - path: report/scores.json
+      md5: 29bd7729cedd25245270290f3a64956b
+      size: 25
