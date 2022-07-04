@@ -11,7 +11,7 @@ load_data:
   sample_frac: 0.01
   raw_dataset_csv: data/raw/news.csv
 
-prepare_data:
+preprocess_data:
   clean_data: data/processed/clean_news.csv
 
 split_data:

@@ -16,7 +16,7 @@ def split_and_saved_data(config_path):
     config = read_params(config_path)
     test_data_path = config["split_data"]["test"] 
     train_data_path = config["split_data"]["train"]
-    clean_data_path = config["prepare_data"]["clean_data"]
+    clean_data_path = config["preprocess_data"]["clean_data"]
     split_ratio = config["split_data"]["test_size"]
     random_state = config["base"]["random_state"]
 
