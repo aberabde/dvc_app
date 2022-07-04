@@ -74,8 +74,8 @@ stages:
       md5: 08d92dae00d63201ad7e83b619cebbfc
       size: 5805108
     - path: src/featurize.py
-      md5: 2881251271b14327b04e2addec3006d2
-      size: 2160
+      md5: e7acb199c36bacc2d88811880a35e949
+      size: 2175
     - path: src/utils
       md5: c740f0a664ac26877dc194d1db10ce09.dir
       size: 11755
