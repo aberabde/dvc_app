@@ -20,7 +20,7 @@ def load_and_save(config_path):
     print(news.head())
     print(news.head().index.tolist())
     
-    print(f" 1% des observations: {news.shape[0]}")
+    print(f" 10% des observations: {news.shape[0]}")
 
     news.to_csv(raw_data_path, sep=";", index=False, encoding="utf-8")
 
