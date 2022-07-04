@@ -22,8 +22,8 @@ split_data:
 featurize:
   featurized_train: data/featurized/featurized_train_news.pkl
   featurized_test: data/featurized/featurized_test_news.pkl
-  max_features: 2500
-  n_grams: 3
+  max_features: 250
+  n_grams: 2
 
 train:
   model : saved_models/model.pkl
