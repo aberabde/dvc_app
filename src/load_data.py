@@ -16,8 +16,10 @@ def load_and_save(config_path):
 
     news = news.sample(frac = sample , random_state = random_state)
 
-    news.reset_index(drop=True, inplace=True)
-    print(news.head(1))
+    #news.reset_index(drop=True, inplace=True)
+    print(news.head())
+    print(news.head().index.tolist())
+    
     print(f" 1% des observations: {news.shape[0]}")
 
     news.to_csv(raw_data_path, sep=";", index=False, encoding="utf-8")

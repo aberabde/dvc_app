@@ -26,7 +26,7 @@ def get_data(config_path):
     fake_news = fake_news.sample(n=real_news.shape[0],random_state=random_state)
     
     news = pd.concat([real_news, fake_news])
-    
+
     #print(news.head(1))
     ## df = pd.read_csv(data_path, sep=",", encoding='utf-8')
     return news

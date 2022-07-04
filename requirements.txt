@@ -6,3 +6,6 @@ pandas
 tqdm
 nltk
 num2words
+Scipy
+Scikit-learn
+numpy
