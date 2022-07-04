@@ -28,7 +28,7 @@ def featurize(config_path):
     train_words = np.array(df_train.text.str.lower().values.astype("U"))
     # print(train_words)
     bag_of_words = CountVectorizer(
-        #stop_words="english",
+        stop_words="english",
         max_features=max_features,
         ngram_range=(1, n_grams)
     )

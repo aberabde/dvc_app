@@ -155,7 +155,7 @@ def processed_data(source):
 
     print("STARTING PREPROCESSING THE RAW TEXT ...\n")
     
-    #tqdm.pandas(desc='Processing Dataframe')
+    tqdm.pandas(desc='Processing Dataframe')
 
     result = keep_alphanumeric_and_dot(source)
     result = convert_lower_case(result)
