@@ -25,6 +25,7 @@ def load_and_save(config_path):
     news.to_csv(raw_data_path, sep=";", index=False, encoding="utf-8")
 
     #joblib.dump(news, raw_data_path, compress=4)
+    #joblib.dump(news, raw_data_path, compress=4)
 
 
 

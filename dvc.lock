@@ -13,8 +13,8 @@ stages:
       md5: 1689e15c1eac996e222061fd176f37ab
       size: 1129
     - path: src/load_data.py
-      md5: 06ad0c72ae29fbbc938aea6c14c2f843
-      size: 999
+      md5: 32cb28462852f7d641e38255aa02301f
+      size: 1050
     outs:
     - path: data/raw/news.csv
       md5: 7b667aca1238c3752edcfabdbfa392ba
