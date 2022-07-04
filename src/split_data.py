@@ -34,8 +34,8 @@ def split_and_saved_data(config_path):
     #train.set_index('Unnamed: 0',inplace=True)
     #test.set_index('Unnamed: 0',inplace=True)
 
-    train.to_csv(train_data_path, sep=";", index=True, encoding="utf-8")
-    test.to_csv(test_data_path, sep=";",index=True,encoding="utf-8")
+    train.to_csv(train_data_path, sep=";", index=False, encoding="utf-8")
+    test.to_csv(test_data_path, sep=";",index=False,encoding="utf-8")
 
     #joblib.dump(train, train_data_path, compress=4)
     #joblib.dump(test, test_data_path, compress=4)

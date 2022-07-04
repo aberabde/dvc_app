@@ -26,12 +26,13 @@ def evaluate(config_path):
     pred = predictions_probabilities[:, 1]
 
     avg_prec = metrics.average_precision_score(labels, pred)
+    roc_auc = metrics.roc_auc_score(labels, pred)
     
     #accuracy = metrics.accuracy_score(labels, pred)
 
     scores = {
-    "avg_prec": avg_prec
-   
+    "avg_prec": avg_prec,
+    "roc_auc" : roc_auc
     }
     print(scores)
     

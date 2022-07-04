@@ -36,7 +36,7 @@ def saved_data(config_path):
     print(clean_news.head())
     print(clean_news.head().index.tolist())
 
-    clean_news.to_csv(clean_data_path, sep=";", index=False, encoding="utf-8")
+    clean_news.to_csv(clean_data_path, sep=";", index=True, encoding="utf-8")
 
 
     random_number = 10

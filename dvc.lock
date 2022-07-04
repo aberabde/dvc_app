@@ -17,6 +17,7 @@ stages:
       size: 1052
     params:
       params.yaml:
+        base.random_state: 42
         load_data.sample_frac: 0.1
     outs:
     - path: data/raw/news.csv
@@ -29,48 +30,49 @@ stages:
       md5: ced797d385ec7f0232e95a6956d42a58
       size: 11082720
     - path: src/preprocess_data.py
-      md5: dba4e06621078ad73b049519a2c7ed98
-      size: 1719
+      md5: 5b1ff85fd321f6e61da9e5ec6c1a5083
+      size: 1718
     - path: src/utils
       md5: c740f0a664ac26877dc194d1db10ce09.dir
       size: 11755
       nfiles: 3
     outs:
     - path: data/processed/clean_news.csv
-      md5: 8a675a6738b9bcccf3d621ae10b5d58c
-      size: 7820196
+      md5: d6f8771425d31d2cc74238df5aa32fcd
+      size: 7840502
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/processed/clean_news.csv
-      md5: 8a675a6738b9bcccf3d621ae10b5d58c
-      size: 7820196
+      md5: d6f8771425d31d2cc74238df5aa32fcd
+      size: 7840502
     - path: src/split_data.py
-      md5: 2b428bf6697cdeaa06d74c33a74e3c3d
-      size: 1475
+      md5: ab8a735e0465f059c91ac0c25363b6c4
+      size: 1477
     - path: src/utils
       md5: c740f0a664ac26877dc194d1db10ce09.dir
       size: 11755
       nfiles: 3
     params:
       params.yaml:
+        base.random_state: 42
         split_data.test_size: 0.5
     outs:
     - path: data/processed/test_news.csv
-      md5: 2afbd315f748af0191f10f0f578cbc25
-      size: 4039514
+      md5: 4a8e8ca3b7e8eb01c8671c7920368acc
+      size: 4039524
     - path: data/processed/train_news.csv
-      md5: a672c922cedc7a1115e04ddb634eb8cf
-      size: 3801020
+      md5: 106c747626b446652e8307634d27921e
+      size: 3801030
   featurize:
     cmd: python src/featurize.py --config=params.yaml
     deps:
     - path: data/processed/test_news.csv
-      md5: 2afbd315f748af0191f10f0f578cbc25
-      size: 4039514
+      md5: 4a8e8ca3b7e8eb01c8671c7920368acc
+      size: 4039524
     - path: data/processed/train_news.csv
-      md5: a672c922cedc7a1115e04ddb634eb8cf
-      size: 3801020
+      md5: 106c747626b446652e8307634d27921e
+      size: 3801030
     - path: src/featurize.py
       md5: 2881251271b14327b04e2addec3006d2
       size: 2160
@@ -80,6 +82,7 @@ stages:
       nfiles: 3
     params:
       params.yaml:
+        base.random_state: 42
         featurize.max_features: 250
         featurize.n_grams: 1
     outs:
@@ -104,27 +107,28 @@ stages:
       nfiles: 3
     params:
       params.yaml:
+        base.random_state: 42
         train.min_split: 12
-        train.n_est: 500
+        train.n_est: 5000
         train.n_jobs: 2
     outs:
     - path: saved_models/model.pkl
-      md5: cfd296dbca97b4de1d55b893880b9cbc
-      size: 5530737
+      md5: eb503cd4d3076f6e874384c17d84f65e
+      size: 55300160
   evaluate:
     cmd: python src/evaluate.py --config=params.yaml
     deps:
     - path: saved_models/model.pkl
-      md5: cfd296dbca97b4de1d55b893880b9cbc
-      size: 5530737
+      md5: eb503cd4d3076f6e874384c17d84f65e
+      size: 55300160
     - path: src/evaluate.py
-      md5: da896d9bfb5f51c71541bfffc25caeb3
-      size: 1165
+      md5: aca57c22643d453aac6a7e8ac28238a6
+      size: 1237
     - path: src/utils
       md5: c740f0a664ac26877dc194d1db10ce09.dir
       size: 11755
       nfiles: 3
     outs:
     - path: report/scores.json
-      md5: 0d1a0e816a01821e7faddefdf6134694
-      size: 39
+      md5: 045420096b45e85fd1832d632a7a0955
+      size: 76

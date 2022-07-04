@@ -8,6 +8,7 @@ stages:
     - data_given/True.csv
     params:
     - load_data.sample_frac
+    - base.random_state
     outs:
      - data/raw/news.csv
 
@@ -28,6 +29,7 @@ stages:
     - data/processed/clean_news.csv
     params:
     - split_data.test_size
+    - base.random_state
     outs: 
     - data/processed/train_news.csv
     - data/processed/test_news.csv
@@ -42,6 +44,7 @@ stages:
     params:
     - featurize.max_features
     - featurize.n_grams
+    - base.random_state
     outs:
     - data/featurized/featurized_train_news.pkl
     - data/featurized/featurized_test_news.pkl
@@ -57,6 +60,7 @@ stages:
     - train.n_est
     - train.n_jobs
     - train.min_split
+    - base.random_state
 
     outs:
     - saved_models/model.pkl

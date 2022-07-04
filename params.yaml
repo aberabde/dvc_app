@@ -27,7 +27,7 @@ featurize:
 
 train:
   model : saved_models/model.pkl
-  n_est : 500
+  n_est : 5000
   n_jobs : 2
   min_split : 12
 
