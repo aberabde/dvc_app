@@ -15,8 +15,8 @@ prepare_data:
   clean_data: data/processed/clean_news.csv
 
 split_data:
-  train_path: data/processed/train_news.csv
-  test_path: data/processed/test_news.csv
+  train: data/processed/train_news.csv
+  test: data/processed/test_news.csv
   test_size: 0.3
 
 featurize:
