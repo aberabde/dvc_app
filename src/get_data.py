@@ -23,6 +23,7 @@ def get_data(config_path):
     fake_news = pd.read_csv(data_path_1)
     fake_news['label'] = 'fake'
 
+    # resample data true and fake 
     fake_news = fake_news.sample(n=real_news.shape[0],random_state=random_state)
     
     news = pd.concat([real_news, fake_news])

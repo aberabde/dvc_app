@@ -11,10 +11,10 @@ def load_and_save(config_path):
     raw_data_path = config["load_data"]["raw_dataset_csv"]
     print(f"100% des observations: {news.shape[0]}")
 
-    samples = config["load_data"]["sample_frac"]
+    pct_sample = config["load_data"]["sample_frac"]
     random_state = config["base"]["random_state"]
 
-    news = news.sample(frac = samples, random_state = random_state)
+    news = news.sample(frac = pct_sample, random_state = random_state)
 
     #news.reset_index(drop=True, inplace=True)
     print(news.head())
