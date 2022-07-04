@@ -16,23 +16,38 @@ None
 nltk.download('averaged_perceptron_tagger', quiet=True)
 nltk.download('omw-1.4', quiet=True)
 import json
+from time import time
+import datetime
 
 
 ###-0
 
-
+def timer_decorator(func):
+    """
+    Affiche le temps d'exécution de l'objet fonction passé comme paramètre
+    """
+    def wrap_func(*args, **kwargs):
+        t1 = time()
+        result = func(*args, **kwargs)
+        t2 = time()
+        seconds_input = (t2-t1)
+        conversion = datetime.timedelta(seconds=seconds_input)
+        converted_time = str(conversion)
+        print(f'Function {func.__name__!r} executed in {converted_time} \n')
+        return result
+    return wrap_func
 
 
 #######-1
 
 
-
+@timer_decorator
 def convert_lower_case(source) -> pd.Series:
     print("starting convertig to lower case ...")
     return source.str.lower()
 
 ###### -2 
-
+@timer_decorator
 def remove_stop_words(source, excluded) -> pd.Series:
     print("Starting removing stopwords ...")
     def helper(line, excluded = excluded):
@@ -40,13 +55,13 @@ def remove_stop_words(source, excluded) -> pd.Series:
     return source.apply(helper)
 
 ###### -3
-
+@timer_decorator
 def keep_alphanumeric_and_dot(source) -> pd.Series:
     print("Starting filtering alphanumeric characters ...")
     return source.apply(lambda x: re.sub('[^A-Za-z0-9.]+', ' ', x))
 
 ###### - 4
-
+@timer_decorator
 def remove_single_characters(source) -> pd.Series:
     print("starting removing single characters ...")
     
@@ -61,7 +76,7 @@ def remove_single_characters(source) -> pd.Series:
     return source.map(helper)
 
 ##### - 5 
-
+@timer_decorator
 def remove_dot(source) -> pd.Series:
     print("starting removing dots ...")
     
@@ -76,7 +91,7 @@ def remove_dot(source) -> pd.Series:
     return source.map(helper)
 
 ###### - 6 
-
+@timer_decorator
 def remove_stop_words(source, excluded) -> pd.Series:
     print("Starting removing stopwords ...")
     def helper(line, excluded = excluded):
@@ -84,7 +99,7 @@ def remove_stop_words(source, excluded) -> pd.Series:
     return source.apply(helper)
 
 #### - 7 
-
+@timer_decorator
 def convert_numbers_to_text(source) -> pd.Series:
     print("starting converting numbers to text ...")
     
@@ -143,7 +158,7 @@ def lemmatize_helper(sentence):
 
     return " ".join(lemmatized_sentence)
 
-
+@timer_decorator
 def lemmatize(source) -> pd.Series:
     print("starting lemmatizing ...")
     return source.apply(lemmatize_helper)
