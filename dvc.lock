@@ -25,13 +25,13 @@ stages:
     - path: data/raw/news.csv
       md5: 7b667aca1238c3752edcfabdbfa392ba
       size: 1114143
-    - path: src
-      md5: 0f0ebc2f7ee5877315b176af87aebe5e.dir
-      size: 22858
-      nfiles: 14
     - path: src/preprocess_data.py
       md5: dba4e06621078ad73b049519a2c7ed98
       size: 1719
+    - path: src/utils
+      md5: c740f0a664ac26877dc194d1db10ce09.dir
+      size: 11755
+      nfiles: 3
     outs:
     - path: data/processed/clean_news.csv
       md5: 69e268017be78503f187279826b7cffc
@@ -45,6 +45,10 @@ stages:
     - path: src/split_data.py
       md5: 2b428bf6697cdeaa06d74c33a74e3c3d
       size: 1475
+    - path: src/utils
+      md5: c740f0a664ac26877dc194d1db10ce09.dir
+      size: 11755
+      nfiles: 3
     outs:
     - path: data/processed/test_news.csv
       md5: 19ed691a2021a688dd008c70825d5ce7
