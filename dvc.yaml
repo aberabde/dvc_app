@@ -8,3 +8,12 @@ stages:
     - data_given/True.csv
     outs:
      - data/raw/news.csv
+
+  preprocess_data:
+    cmd: python src/preprocess_data.py --config=params.yaml
+    deps:
+    - data/raw/news.csv
+    - src/preprocess_data.py
+    - src
+    outs:
+    - data/processed/clean_news.csv
