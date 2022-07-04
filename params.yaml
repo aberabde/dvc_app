@@ -1,14 +1,14 @@
 base:
   project: Fake_True_News_Classification
   random_state: 42
-  target_col: TARGET
+  #target_col: labels
 
 data_source:
   s3_source_1: data_given/Fake.csv
   s3_source_2: data_given/True.csv
 
 load_data:
-  sample_frac: 0.01
+  sample_frac: 0.1
   raw_dataset_csv: data/raw/news.csv
 
 preprocess_data:

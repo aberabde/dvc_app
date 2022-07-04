@@ -6,7 +6,6 @@ stages:
     - src/load_data.py
     - data_given/Fake.csv
     - data_given/True.csv
-    - src
     outs:
      - data/raw/news.csv
 
