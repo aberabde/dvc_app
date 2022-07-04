@@ -81,20 +81,20 @@ stages:
     params:
       params.yaml:
         featurize.max_features: 250
-        featurize.n_grams: 2
+        featurize.n_grams: 1
     outs:
     - path: data/featurized/featurized_test_news.pkl
-      md5: 223af389183895fe9cc237fd07f3fc9c
-      size: 1372984
+      md5: 273e44a761fe6f49699dbbfd24931a25
+      size: 1347784
     - path: data/featurized/featurized_train_news.pkl
-      md5: 5eb612af72b574e1cf052d9abfb8893c
-      size: 1345092
+      md5: e323787d512c9922e9c6b29701d61952
+      size: 1319748
   train:
     cmd: python src/train.py --config=params.yaml
     deps:
     - path: data/featurized/featurized_train_news.pkl
-      md5: 5eb612af72b574e1cf052d9abfb8893c
-      size: 1345092
+      md5: e323787d512c9922e9c6b29701d61952
+      size: 1319748
     - path: src/train.py
       md5: 24f5a4fd03af957e05c00ae298d25aad
       size: 1188
@@ -109,14 +109,14 @@ stages:
         train.n_jobs: 2
     outs:
     - path: saved_models/model.pkl
-      md5: 93f2d7f8e0e7adc9f06445c1d6a8f698
-      size: 5498184
+      md5: cfd296dbca97b4de1d55b893880b9cbc
+      size: 5530737
   evaluate:
     cmd: python src/evaluate.py --config=params.yaml
     deps:
     - path: saved_models/model.pkl
-      md5: 93f2d7f8e0e7adc9f06445c1d6a8f698
-      size: 5498184
+      md5: cfd296dbca97b4de1d55b893880b9cbc
+      size: 5530737
     - path: src/evaluate.py
       md5: da896d9bfb5f51c71541bfffc25caeb3
       size: 1165
@@ -126,5 +126,5 @@ stages:
       nfiles: 3
     outs:
     - path: report/scores.json
-      md5: e5f13bb7a64c473ed126501affffee4c
-      size: 40
+      md5: 0d1a0e816a01821e7faddefdf6134694
+      size: 39
