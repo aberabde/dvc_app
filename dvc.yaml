@@ -22,7 +22,6 @@ stages:
     deps:
     - src/split_data.py
     - data/processed/clean_news.csv
-    - data/src/utils/data_clean.py
     outs: 
     - data/processed/train_news.csv
     - data/processed/test_news.csv

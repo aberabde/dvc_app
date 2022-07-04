@@ -19,3 +19,16 @@ stages:
     - path: data/raw/news.csv
       md5: 7b667aca1238c3752edcfabdbfa392ba
       size: 1114143
+  preprocess_data:
+    cmd: python src/preprocess_data.py --config=params.yaml
+    deps:
+    - path: data/raw/news.csv
+      md5: 7b667aca1238c3752edcfabdbfa392ba
+      size: 1114143
+    - path: src/preprocess_data.py
+      md5: dba4e06621078ad73b049519a2c7ed98
+      size: 1719
+    outs:
+    - path: data/processed/clean_news.csv
+      md5: 69e268017be78503f187279826b7cffc
+      size: 785723
