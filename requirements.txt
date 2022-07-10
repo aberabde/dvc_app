@@ -3,13 +3,15 @@ dvc[gdrive]
 sklearn
 PyYAML
 pandas
-tqdm
-nltk
 num2words
-Scipy
-Scikit-learn
+scipy
+scikit-learn
 numpy
 flask
 gunicorn
-
+nltk>=3.4.5
+Jinja2
+MarkupSafe
+Werkzeug
+itsdangerous
 
