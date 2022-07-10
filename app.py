@@ -5,7 +5,7 @@ import pandas as pd
 import pickle
 # from sklearn.externals import joblib
 from src.get_data import read_params
-# from joblib import dump, load
+from joblib import dump, load
 from sklearn.feature_extraction.text import CountVectorizer
 from src.utils.data_clean import processed_data
 
