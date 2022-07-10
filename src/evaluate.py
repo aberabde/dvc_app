@@ -21,7 +21,7 @@ def evaluate(config_path):
 
     labels = np.squeeze(matrix[:, 1].toarray())
     X = matrix[:, 2:]
-
+    print(X)
     predictions_probabilities = model.predict_proba(X)
     pred = predictions_probabilities[:, 1]
 

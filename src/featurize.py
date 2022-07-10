@@ -20,7 +20,9 @@ def featurize(config_path):
     featurized_test_path =  config['featurize']["featurized_test"]
     max_features = config["featurize"]["max_features"]
     n_grams = config["featurize"]["n_grams"]
-    
+    bag_of_words_path = config["featurize"]["bag_of_words"]
+    tfidf_path = config["featurize"]["tfidf"]
+
     # train
 
     df_train = get_df(clean_train_path, sep=";")
@@ -28,18 +30,21 @@ def featurize(config_path):
     # print(df_train['text'].isnull().values.any())
     # print(df_train[df_train['text'].isna()])
     train_words = np.array(df_train.text.str.lower().values.astype("U"))
+    # print(train_words)
     bag_of_words = CountVectorizer(
         # stop_words="english",
         max_features=max_features,
         ngram_range=(1, n_grams)
     )
-
+  
     bag_of_words.fit(train_words)
+    dump(bag_of_words, bag_of_words_path)
     train_words_binary_matrix = bag_of_words.transform(train_words)
-    # print(train_words_binary_matrix)
+    print(train_words_binary_matrix)
     tfidf = TfidfTransformer(smooth_idf=False)
     tfidf.fit(train_words_binary_matrix)
     train_words_tfidf_matrix = tfidf.transform(train_words_binary_matrix)
+    dump(tfidf, tfidf_path)
 
     # call a function to save this matrix
     save_matrix(df=df_train, text_matrix=train_words_tfidf_matrix, out_path=featurized_train_path)

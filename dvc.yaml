@@ -48,6 +48,8 @@ stages:
     outs:
     - data/featurized/featurized_train_news.pkl
     - data/featurized/featurized_test_news.pkl
+    - saved_models/bag_of_words.pkl
+    - saved_models/tfidf.pkl
 
   train :
     cmd: python src/train.py --config=params.yaml
