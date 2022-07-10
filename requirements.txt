@@ -10,4 +10,6 @@ Scipy
 Scikit-learn
 numpy
 flask
-joblib
+gunicorn
+
+
