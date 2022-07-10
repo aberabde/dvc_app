@@ -19,8 +19,7 @@ def saved_data(config_path):
     news['text']   = processed_data(news['text'] )
     news['title']  = processed_data(news['title'] )
 
-
-    
+    news['text'] = news['title']+""+news['text']
 
     #clean_news.to_csv(clean_data_path, sep=";", encoding="utf-8")
     #df = joblib.load('df.joblib')
@@ -33,10 +32,9 @@ def saved_data(config_path):
  
     clean_news.reset_index(drop=True, inplace=True)
 
-    print(clean_news.head())
-    print(clean_news.head().index.tolist())
 
-    clean_news.to_csv(clean_data_path, sep=";", index=True, encoding="utf-8")
+    
+    clean_news.to_csv(clean_data_path, sep=";", index=False, encoding="utf-8")
 
 
     random_number = 10
@@ -46,7 +44,8 @@ def saved_data(config_path):
     print("Contenu: {text}\n".format(text = clean_news.text[random_number]))
     print("Clasification: {label}".format(label = clean_news.label[random_number]))
 
-
+    
+    
 
 if __name__=="__main__":
     args = argparse.ArgumentParser()

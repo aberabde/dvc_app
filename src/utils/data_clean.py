@@ -186,27 +186,27 @@ def processed_data(source):
 
 def get_df(path_to_data:str, 
             sep = ';', 
-            column_names : list=['id','label','text'],
+            column_names : list=['label','text'],
             encoding = 'utf8') -> pd.DataFrame:
     df = pd.read_csv(
         path_to_data,
-        usecols= ["Unnamed: 0","label","text"] ,
+        usecols= ["label","text"] ,
         delimiter = sep, 
         encoding =encoding,
         # header = None,
-        # names=column_names
+        # names=column_names "Unnamed: 0",'id',
     
     )
-    df.rename(columns={"Unnamed: 0":"id"}, inplace = True)
+    # df.rename(columns={"Unnamed: 0":"id"}, inplace = True)
     return df
 
 def save_matrix(df, text_matrix, out_path):
     # print("summary: >>>>>>>>>>>>>>>\n",df.describe())
-    id_matrix = sparse.csr_matrix(df.id.astype(np.int64)).T
+    id_matrix = sparse.csr_matrix(df.index.values.astype(np.int64)).T
     label_matrix = sparse.csr_matrix(df.label.astype(np.int64)).T
 
     result = sparse.hstack([id_matrix, label_matrix, text_matrix], format="csr")
-    # print(result)
+    print(result)
     joblib.dump(result, out_path) 
 
 def save_json(path: str, data: dict) -> None:

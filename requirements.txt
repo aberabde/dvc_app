@@ -9,3 +9,5 @@ num2words
 Scipy
 Scikit-learn
 numpy
+flask
+joblib

@@ -3,11 +3,11 @@ import argparse
 from flask import Flask,render_template,url_for,request
 import pandas as pd 
 import pickle
-from sklearn.externals import joblib
-from get_data import read_params
-from joblib import dump, load
+# from sklearn.externals import joblib
+from src.get_data import read_params
+# from joblib import dump, load
 from sklearn.feature_extraction.text import CountVectorizer
-from utils.data_clean import processed_data
+from src.utils.data_clean import processed_data
 
 
 
@@ -15,8 +15,8 @@ from utils.data_clean import processed_data
 # load the model from disk
 # filename = 'nlp_model.pkl'
 # clf = pickle.load(open(filename, 'rb'))
-config = read_params(config_path)
-model_path = config["train"]["model"]
+
+
 
 
 
@@ -31,19 +31,27 @@ def home():
 
 @app.route('/predict',methods=['POST'])
 
-def predict():
-    	if request.method == 'POST':
-		message1 = request.form['message']
-		message = processed_data(message1)
+def predict(config_path):
+	config = read_params(config_path)
+	model_path = config["train"]["model"]
+	max_features = config["featurize"]["max_features"]
+	n_grams = config["featurize"]["n_grams"]
+
+
+
+	if request.method == 'POST':
+		message = request.form['message']
+		message = processed_data(message)
 		data = [message]
+		bag_of_words = CountVectorizer(
+    	# stop_words="english",
+    		max_features=max_features,
+    		ngram_range=(1, n_grams))
+		vect = bag_of_words.transform(data).toarray()
 		
 		
 		
-		vect = cv.transform(data).toarray()
-		
-		
-		
-		my_prediction = clf.predict(vect)
+		my_prediction = model_path.predict(vect)
 	return render_template('result.html',prediction = my_prediction)
 
 if __name__=="__main__":
@@ -54,3 +62,4 @@ if __name__=="__main__":
 
 if __name__ == '__main__':
 	app.run(debug=True)
+	

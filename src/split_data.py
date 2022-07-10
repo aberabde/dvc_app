@@ -27,7 +27,13 @@ def split_and_saved_data(config_path):
         stratify=df.label, 
         random_state=random_state
         )
-        
+
+    print(df.head())
+    print(df.head().index.tolist())
+    
+    print(df['text'].isnull().values.any())
+    
+    print(df[df['text'].isna()])   
     print(test.head())
     print(test.head().index.to_list())
 
