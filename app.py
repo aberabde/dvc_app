@@ -32,7 +32,7 @@ def home():
 @app.route('/predict',methods=['POST'])
 
 def predict(config_path):
-	config = read_params(config_path)
+	
 	model_path = config["train"]["model"]
 	max_features = config["featurize"]["max_features"]
 	n_grams = config["featurize"]["n_grams"]
