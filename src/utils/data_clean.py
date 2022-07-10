@@ -168,7 +168,7 @@ def lemmatize(source) -> pd.Series:
 def processed_data(source):
 
 
-    print("STARTING PREPROCESSING THE RAW TEXT ...\n")
+    # print("STARTING PREPROCESSING THE RAW TEXT ...\n")
     
     tqdm.pandas(desc='Processing Dataframe')
 
@@ -180,7 +180,7 @@ def processed_data(source):
     result = remove_dot(result)
     result = remove_stop_words(result, stopwords.words('english'))
     
-    print("FINISHED PREPROCESSING THE RAW TEXT ...")
+    # print("FINISHED PREPROCESSING THE RAW TEXT ...")
     return result
 
 
@@ -206,7 +206,7 @@ def save_matrix(df, text_matrix, out_path):
     label_matrix = sparse.csr_matrix(df.label.astype(np.int64)).T
 
     result = sparse.hstack([id_matrix, label_matrix, text_matrix], format="csr")
-
+    # print(result)
     joblib.dump(result, out_path) 
 
 def save_json(path: str, data: dict) -> None:
