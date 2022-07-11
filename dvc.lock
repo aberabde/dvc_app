@@ -33,8 +33,8 @@ stages:
       md5: 4d3b851f48da57b464fe211ed979a723
       size: 1702
     - path: src/utils
-      md5: f42875fcd0a3debdb46cc42daf84aad7.dir
-      size: 13013
+      md5: d01dea3f5a561bef60cd2102ec6181dc.dir
+      size: 12946
       nfiles: 3
     outs:
     - path: data/processed/clean_news.csv
@@ -50,8 +50,8 @@ stages:
       md5: 80964b48b180e2f47fa20a083b547640
       size: 1622
     - path: src/utils
-      md5: f42875fcd0a3debdb46cc42daf84aad7.dir
-      size: 13013
+      md5: d01dea3f5a561bef60cd2102ec6181dc.dir
+      size: 12946
       nfiles: 3
     params:
       params.yaml:
@@ -77,8 +77,8 @@ stages:
       md5: 8d4c4da3070d3d39d8c025f815453c21
       size: 2495
     - path: src/utils
-      md5: f42875fcd0a3debdb46cc42daf84aad7.dir
-      size: 13013
+      md5: d01dea3f5a561bef60cd2102ec6181dc.dir
+      size: 12946
       nfiles: 3
     params:
       params.yaml:
@@ -93,7 +93,7 @@ stages:
       md5: 5db004db86bc1ede2345c5fbcae9000d
       size: 371000
     - path: saved_models/bag_of_words.pkl
-      md5: 08020fc59776f2725bc2f72b6796c600
+      md5: b1af524d2b0f7f4a61c62a7a08a1c051
       size: 257979
     - path: saved_models/tfidf.pkl
       md5: 5ec3d45a25be59d0b417450397bbaee4
@@ -108,8 +108,8 @@ stages:
       md5: 24f5a4fd03af957e05c00ae298d25aad
       size: 1188
     - path: src/utils
-      md5: f42875fcd0a3debdb46cc42daf84aad7.dir
-      size: 13013
+      md5: d01dea3f5a561bef60cd2102ec6181dc.dir
+      size: 12946
       nfiles: 3
     params:
       params.yaml:
@@ -131,8 +131,8 @@ stages:
       md5: af385123fbce8e4c243e4a44fb1211b6
       size: 1249
     - path: src/utils
-      md5: f42875fcd0a3debdb46cc42daf84aad7.dir
-      size: 13013
+      md5: d01dea3f5a561bef60cd2102ec6181dc.dir
+      size: 12946
       nfiles: 3
     outs:
     - path: report/scores.json
