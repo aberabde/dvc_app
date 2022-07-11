@@ -18,17 +18,17 @@ stages:
     params:
       params.yaml:
         base.random_state: 42
-        load_data.sample_frac: 0.02
+        load_data.sample_frac: 0.01
     outs:
     - path: data/raw/news.csv
-      md5: 022a8d56d4bf8155d207657f153574cb
-      size: 2238313
+      md5: 7b667aca1238c3752edcfabdbfa392ba
+      size: 1114143
   preprocess_data:
     cmd: python src/preprocess_data.py --config=params.yaml
     deps:
     - path: data/raw/news.csv
-      md5: 022a8d56d4bf8155d207657f153574cb
-      size: 2238313
+      md5: 7b667aca1238c3752edcfabdbfa392ba
+      size: 1114143
     - path: src/preprocess_data.py
       md5: 4d3b851f48da57b464fe211ed979a723
       size: 1702
@@ -38,14 +38,14 @@ stages:
       nfiles: 3
     outs:
     - path: data/processed/clean_news.csv
-      md5: 7492931ba35280bd4fcf004f2b645671
-      size: 1636198
+      md5: eec9212a6f5505dec6af4f953d8fdcb6
+      size: 812085
   split_data:
     cmd: python src/split_data.py --config=params.yaml
     deps:
     - path: data/processed/clean_news.csv
-      md5: 7492931ba35280bd4fcf004f2b645671
-      size: 1636198
+      md5: eec9212a6f5505dec6af4f953d8fdcb6
+      size: 812085
     - path: src/split_data.py
       md5: 80964b48b180e2f47fa20a083b547640
       size: 1622
@@ -59,20 +59,20 @@ stages:
         split_data.test_size: 0.3
     outs:
     - path: data/processed/test_news.csv
-      md5: 8e7dfdd2e6e86a3d0cc7f819bf57c64c
-      size: 495697
+      md5: 433cbd872e5b53a72e55b9d98b1b9c25
+      size: 254775
     - path: data/processed/train_news.csv
-      md5: 8ff679bda4703f9449bb5568e4dc2b79
-      size: 1140532
+      md5: bac963e127d2cf5523f17afd261159dd
+      size: 557341
   featurize:
     cmd: python src/featurize.py --config=params.yaml
     deps:
     - path: data/processed/test_news.csv
-      md5: 8e7dfdd2e6e86a3d0cc7f819bf57c64c
-      size: 495697
+      md5: 433cbd872e5b53a72e55b9d98b1b9c25
+      size: 254775
     - path: data/processed/train_news.csv
-      md5: 8ff679bda4703f9449bb5568e4dc2b79
-      size: 1140532
+      md5: bac963e127d2cf5523f17afd261159dd
+      size: 557341
     - path: src/featurize.py
       md5: 8d4c4da3070d3d39d8c025f815453c21
       size: 2495
@@ -83,27 +83,27 @@ stages:
     params:
       params.yaml:
         base.random_state: 42
-        featurize.max_features: 250
-        featurize.n_grams: 1
+        featurize.max_features: 2500
+        featurize.n_grams: 3
     outs:
     - path: data/featurized/featurized_test_news.pkl
-      md5: 96231f6f79b281cbf99693084aa51c0d
-      size: 162480
+      md5: 1fbf70f5534c843ac6508a4b961c78c4
+      size: 204827
     - path: data/featurized/featurized_train_news.pkl
-      md5: 5db004db86bc1ede2345c5fbcae9000d
-      size: 371000
+      md5: 68d8a1b4eb272c372575ef10400d4ee6
+      size: 491085
     - path: saved_models/bag_of_words.pkl
-      md5: 5e37673f0db378ac2224bcfca906db94
-      size: 257979
+      md5: 8e842a9d54fea98b1836bcc47336820e
+      size: 3795888
     - path: saved_models/tfidf.pkl
-      md5: 5ec3d45a25be59d0b417450397bbaee4
-      size: 4653
+      md5: e788ca22c57ffd8c104e076cd29870f3
+      size: 40659
   train:
     cmd: python src/train.py --config=params.yaml
     deps:
     - path: data/featurized/featurized_train_news.pkl
-      md5: 5db004db86bc1ede2345c5fbcae9000d
-      size: 371000
+      md5: 68d8a1b4eb272c372575ef10400d4ee6
+      size: 491085
     - path: src/train.py
       md5: 24f5a4fd03af957e05c00ae298d25aad
       size: 1188
@@ -119,14 +119,14 @@ stages:
         train.n_jobs: 2
     outs:
     - path: saved_models/model.pkl
-      md5: cfd21eb7f14cf11588e34ff9901b701b
-      size: 23399366
+      md5: 90415b6784a75bfb90d7a73cc27b4905
+      size: 20113495
   evaluate:
     cmd: python src/evaluate.py --config=params.yaml
     deps:
     - path: saved_models/model.pkl
-      md5: cfd21eb7f14cf11588e34ff9901b701b
-      size: 23399366
+      md5: 90415b6784a75bfb90d7a73cc27b4905
+      size: 20113495
     - path: src/evaluate.py
       md5: af385123fbce8e4c243e4a44fb1211b6
       size: 1249
@@ -136,5 +136,5 @@ stages:
       nfiles: 3
     outs:
     - path: report/scores.json
-      md5: 10b90935d5dfd97ad15a0fd17e624c03
+      md5: 768e55c53f3f2d4ef180317a9ec908a1
       size: 76

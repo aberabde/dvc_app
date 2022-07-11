@@ -8,7 +8,7 @@ data_source:
   s3_source_2: data_given/True.csv
 
 load_data:
-  sample_frac: 0.02
+  sample_frac: 0.01
   raw_dataset_csv: data/raw/news.csv
 
 preprocess_data:
@@ -24,8 +24,8 @@ featurize:
   featurized_test: data/featurized/featurized_test_news.pkl
   bag_of_words : saved_models/bag_of_words.pkl
   tfidf : saved_models/tfidf.pkl
-  max_features: 250
-  n_grams: 1
+  max_features: 2500
+  n_grams: 3
 
 train:
   model : saved_models/model.pkl
