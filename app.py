@@ -19,7 +19,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-	return render_template('home.html')
+	return render_template('Home.html')
 
 @app.route('/predict',methods=['POST'])
 
@@ -32,7 +32,7 @@ def predict():
 		message = request.form['message']
 
 		message= pd.Series(message)
-# message = message.to_frame()[0] 
+
 		data = processed_data(message)
 		data_words = np.array(data.str.lower().values.astype("U"))
 		# print(data_words)
@@ -40,13 +40,13 @@ def predict():
 		
 		bag_of_words = load(os.path.join("saved_models", "bag_of_words.pkl"))
 		tfidf = load(os.path.join("saved_models", "tfidf.pkl"))
-# bag_of_words = CountVectorizer()		
+	
 		vect = bag_of_words.transform(data_words)
 		vect_tfidf = tfidf.transform(vect)
 		
 		model = load(os.path.join("saved_models", "model.pkl"))
 		my_prediction = model.predict(vect_tfidf)
-# print(my_prediction[0])
+
 	return render_template('result.html',prediction = my_prediction)
 
 
