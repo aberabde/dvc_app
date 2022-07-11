@@ -13,8 +13,8 @@ from nltk.corpus import wordnet
 from nltk import tokenize
 nltk.download('stopwords', quiet=True)
 None
-#nltk.download('averaged_perceptron_tagger', quiet=True)
-#nltk.download('omw-1.4', quiet=True)
+nltk.download('averaged_perceptron_tagger', quiet=True)
+nltk.download('omw-1.4', quiet=True)
 import json
 from time import time
 import datetime
