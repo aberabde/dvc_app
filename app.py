@@ -38,13 +38,13 @@ def predict():
 		# print(data_words)
 		# data = [message]
 		
-		bag_of_words = load(os.path.join("saved_models", "bag_of_words.pkl"))
-		tfidf = load(os.path.join("saved_models", "tfidf.pkl"))
+		bag_of_words = load(os.path.join("prediction_service","transforms", "bag_of_words.pkl"))
+		tfidf = load(os.path.join("prediction_service","transforms", "tfidf.pkl"))
 	
 		vect = bag_of_words.transform(data_words)
 		vect_tfidf = tfidf.transform(vect)
 		
-		model = load(os.path.join("saved_models", "model.pkl"))
+		model = load(os.path.join("prediction_service","model" ,"model.pkl"))
 		my_prediction = model.predict(vect_tfidf)
 
 	return render_template('result.html',prediction = my_prediction)

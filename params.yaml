@@ -36,4 +36,7 @@ train:
 evaluate:
   metrics : report/scores.json
 
-# webapp_model_dir: prediction_service/model/model.pkl
+# webapp_model_dir: 
+#   model: prediction_service/model/model.pkl
+#   cv: prediction_service/transforms/bag_of_words.pkl
+#   tfidf: prediction_service/transforms/tfidf.pkl
