@@ -35,3 +35,5 @@ train:
 
 evaluate:
   metrics : report/scores.json
+
+# webapp_model_dir: prediction_service/model/model.pkl
